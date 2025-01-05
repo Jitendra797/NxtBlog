@@ -21,7 +21,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { PasswordInput } from "@/components/ui/passwordinput";
+import { PasswordInput } from "@/components/ui/password-input";
 import { Input } from "@/components/ui/input";
 
 // Improved schema with additional validation rules
@@ -126,7 +126,7 @@ export default function Login() {
           </Form>
           <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{" "}
-            <Link href="#" className="text-blue-500">
+            <Link href="/signup" className="text-blue-500">
               Sign up
             </Link>
           </div>
