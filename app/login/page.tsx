@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -34,6 +35,36 @@ const formSchema = z.object({
 });
 
 export default function Login() {
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch(`/api/auth/${email}`, {
+        // Use dynamic segment in the URL for security
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        // Store JWT in localStorage, cookies, or state management
+        localStorage.setItem("token", data.token); // Example using localStorage
+        // Redirect to the home page or dashboard after successful login
+        router.push("/"); // Use the useRouter hook for client-side navigation
+      } else {
+        const errorData = await res.json();
+        setError(errorData.error); // Display the error message to the user
+      }
+    } catch (error) {
+      console.error("An error occurred during login:", error);
+      setError("An error occurred during login."); // Handle network or other errors
+    }
+  };
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
