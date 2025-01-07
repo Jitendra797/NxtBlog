@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/card";
 import { PasswordInput } from "@/components/ui/password-input";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/hooks/use-toast";
 
 // Improved schema with additional validation rules
 const formSchema = z.object({

@@ -24,6 +24,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
 import { PhoneInput } from "@/components/ui/phone-input";
+import { toast } from "@/hooks/use-toast";
 
 // Define validation schema using Zod
 const formSchema = z
